@@ -6,7 +6,7 @@
 trigger: none
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: Newpool
 
 steps:
 - task: TerraformCLI@0

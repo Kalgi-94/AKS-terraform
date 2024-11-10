@@ -7,16 +7,19 @@ trigger: none
 
 pool: Newpool
 
-steps:
-- task: TerraformCLI@2
-  displayName: Terraform Init
-  inputs:
-    command: 'init'
-    allowTelemetryCollection: true
+jobs:
 
-- task: TerraformCLI@2
-  displayName: Terraform Plan
-  inputs:
-    command: 'plan'
-    environmentServiceName: 'AKS_Proj3'
-    allowTelemetryCollection: true
+  - job: install_terraform
+    displayName: "Installing Terraform"
+    steps:
+      - task: TerraformInstaller@0
+        displayName: 'Install Terraform latest'
+
+  - job: terraform_init
+    displayName: "Terraform Init"
+    dependsOn: install_terraform
+    steps:
+      - task: TerraformCLI@2
+        displayName: 'Terraform : init'
+
+
